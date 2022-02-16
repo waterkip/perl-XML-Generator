@@ -708,9 +708,9 @@ sub xmlpi {
      while (my($k, $v) = each %atts) {
        $this->XML::Generator::util::ck_syntax($k);
        XML::Generator::util::escape($v,
-                XML::Generator::util::ESCAPE_FILTER_INVALID_CHARS() |
                 XML::Generator::util::ESCAPE_ATTR() |
                 $this->{'escape'});
+       XML::Generator::util::filter($v);
        $xml .= qq{ $k="$v"};
      }
   }
@@ -1133,9 +1133,7 @@ sub c_tag {
              : $arg->{'pretty'}
                ? " " x $arg->{'pretty'}
                : "";
-  if ($arg->{'filter_invalid_chars'}) {
-    $escape |= ESCAPE_FILTER_INVALID_CHARS;
-  }
+  my $filter = $arg->{'filter_invalid_chars'};
 
   my $blessClass = $indent ? 'XML::Generator::pretty' : 'XML::Generator::overload';
 
@@ -1156,11 +1154,12 @@ sub c_tag {
     }
 
     # Deal with escaping if required
-   if ($escape) {
+   if ($escape || $filter) {
       if ($attr) {
 	foreach my $key (keys %{$attr}) {
 	  next unless defined($attr->{$key});
 	  XML::Generator::util::escape($attr->{$key}, ESCAPE_ATTR() | $escape);
+	  XML::Generator::util::filter($attr->{$key}) if ($filter);
 	}
       }
       for (@args) {
@@ -1171,7 +1170,8 @@ sub c_tag {
 	  # un-ref it
 	  $_ = $$_;
 	} elsif (! UNIVERSAL::isa($_, 'XML::Generator::overload') ) {
-	  XML::Generator::util::escape($_, $escape);
+	  XML::Generator::util::escape($_, $escape) if $escape ;
+	  XML::Generator::util::filter($_) if $filter;
 	}
       }
     } else {
@@ -1400,9 +1400,6 @@ sub escape {
   } 
   if ($f & ESCAPE_HIGH_BIT) {
     $_[0] =~ s/([\200-\377])/'&#'.ord($1).';'/ge;
-  }
-  if ($f & ESCAPE_FILTER_INVALID_CHARS) {
-    filter($_[0]);
   }
 }
 
