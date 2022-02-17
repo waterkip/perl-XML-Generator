@@ -6,4 +6,6 @@ Makefile.PL
 t/Generator.t
 t/DOM.t
 README
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml			Module meta-data (added by MakeMaker)
+t/Issue-70986.t
+t/Issue-80273.t
