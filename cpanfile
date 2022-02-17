@@ -13,5 +13,6 @@ on 'configure' => sub {
 };
 
 on 'develop' => sub {
+  requires "Test::Pod" => "1.41";
   requires "Test::Spelling" => "0.12";
 };

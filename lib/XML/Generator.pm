@@ -1,6 +1,7 @@
 package XML::Generator;
 
 use strict;
+use warnings;
 use Carp;
 use vars qw/$VERSION $AUTOLOAD/;
 
@@ -27,7 +28,7 @@ XML::Generator - Perl extension for generating XML
   print $X->foo($X->bar({ baz => 3 }, $X->bam()),
 		$X->bar([ 'qux' => 'http://qux.com/' ],
 			  "Hey there, world"));
- 
+
 Either of the above yield:
 
    <foo xmlns:qux="http://qux.com/">
@@ -451,7 +452,7 @@ Note that if you already have an C<AUTOLOAD> defined, it will be overwritten.
 =head2 :stacked
 
 Implies :import, but if there is already an C<AUTOLOAD> defined, the
-overriding C<AUTOLOAD> will still give it a chance to run.  See L<"STACKED
+overriding C<AUTOLOAD> will still give it a chance to run.  See L<"STACKABLE
 AUTOLOADs">.
 
 =head2 ANYTHING ELSE
@@ -743,7 +744,7 @@ sub xmlcmnt {
   return XML::Generator::comment->new([$xml]);
 }
 
-=head2 xmldecl(@args)
+=head2 xmldecl (@args)
 
 Declaration.  This can be used to specify the version, encoding, and
 other XML-related declarations (i.e., anything inside the <?xml?> tag).
@@ -941,7 +942,7 @@ So, let's assume that we want to provide a custom HTML table() method:
 
    sub table {
        my $self = shift;
-       
+
        # parse our args to get namespace and attribute info
        my($namespace, $attr, @content) =
           $self->XML::Generator::util::parse_args(@_)
@@ -1553,6 +1554,11 @@ First modular version
 Modular rewrite to enable subclassing
 
 =back
+
+=head1 LICENSE
+
+This library is free software, you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 

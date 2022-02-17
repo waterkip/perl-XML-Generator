@@ -427,7 +427,7 @@ IMPORT ARGUMENTS
 
   :stacked
     Implies :import, but if there is already an "AUTOLOAD" defined, the
-    overriding "AUTOLOAD" will still give it a chance to run. See "STACKED
+    overriding "AUTOLOAD" will still give it a chance to run. See "STACKABLE
     AUTOLOADs".
 
   ANYTHING ELSE
@@ -466,7 +466,7 @@ SPECIAL TAGS
     comment delimiters. Any occurences of '--' in the concatenated arguments
     are converted to '&#45;&#45;'
 
-  xmldecl(@args)
+  xmldecl (@args)
     Declaration. This can be used to specify the version, encoding, and
     other XML-related declarations (i.e., anything inside the <?xml?> tag).
     @args can be used to control what is output, as keyword-value pairs.
@@ -552,7 +552,7 @@ CREATING A SUBCLASS
 
        sub table {
            my $self = shift;
-       
+
            # parse our args to get namespace and attribute info
            my($namespace, $attr, @content) =
               $self->XML::Generator::util::parse_args(@_)
@@ -661,6 +661,10 @@ AUTHORS
 
     Nathan Wiger <nate@nateware.com>
         Modular rewrite to enable subclassing
+
+LICENSE
+    This library is free software, you can redistribute it and/or modify it
+    under the same terms as Perl itself.
 
 SEE ALSO
     The XML::Writer module
