@@ -2,8 +2,15 @@ Revision history for Perl extension XML::Generator.
 
 {{$NEXT}}
 
+1.07 -- Thu Feb 17 16:58:42 AST 2022
+
+    - c70c220 Add .gitignore
+    - 124e36a Update version and Dist::Zilla settings
+    - 0f6ccd0 Fix some pod issues
+
 1.06 -- Thu Feb 17 08:04:38 AST 2022
 
+    - 7c9d6d5 v1.06
     - a676ff3 Merge pull request #1 from perl-net-saml2/distzilla
     - d565282 Move to Dist::Zilla
 
