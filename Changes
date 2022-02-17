@@ -1,10 +1,18 @@
 Revision history for Perl extension XML::Generator.
 
+{{$NEXT}}
+
+1.06 -- Thu Feb 17 08:04:38 AST 2022
+
+    - a676ff3 Merge pull request #1 from perl-net-saml2/distzilla
+    - d565282 Move to Dist::Zilla
+
 1.05     Wed Feb 16 22:00:00 2022
 
+    - 1eb746e (tag: 1.05) Update for new release
     - 0e895a0 Add github action
     - f636f4b Fix RT 77323: escape all characters outside the normal ASCII range
-    - 423c2cf Fix RT issue 80273
+    - 423c2cf Fix RT 80273 v1.04 incorrectly escaping stringified inner tags
     - 8ef1c52 Fixes RT 70986 and provides test
 
 1.04     Fri Jul 15 08:35:00 2011
