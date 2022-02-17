@@ -5,7 +5,7 @@ use warnings;
 use Carp;
 use vars qw/$VERSION $AUTOLOAD/;
 
-our $VERSION = '1.06';
+our $VERSION = '1.08';
 
 =head1 NAME
 
