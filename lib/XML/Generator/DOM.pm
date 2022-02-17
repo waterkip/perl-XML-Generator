@@ -53,7 +53,7 @@ use XML::DOM;
 
 use vars qw( $AUTOLOAD $VERSION );
 
-our $VERSION = '0.3';
+our $VERSION = '1.07';
 
 =head1 CONSTRUCTOR
 
