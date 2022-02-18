@@ -2,6 +2,20 @@ Revision history for Perl extension XML::Generator.
 
 {{$NEXT}}
 
+1.08 -- Thu Feb 17 20:00:24 AST 2022
+
+    [Significant Updates since 1.04]
+
+    - Fix RT 77323: escape all characters outside the normal ASCII range
+    - Fix RT 80273 v1.04 incorrectly escaping stringified inner tags
+    - Fix RT 70986 and provides test
+    - Move to Dist::Zilla to build
+
+    [Changes since 1.07]
+
+    - 6258a3b Update version number for release
+    - c9a09d4 v1.07
+
 1.07 -- Thu Feb 17 16:58:42 AST 2022
 
     - c70c220 Add .gitignore
