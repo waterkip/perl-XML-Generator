@@ -2,6 +2,12 @@ Revision history for Perl extension XML::Generator.
 
 {{$NEXT}}
 
+1.09 -- Fri Feb 18 23:06:27 AST 2022
+
+    - b31c19f Increment version
+    - 1a3fa9e Fix RT 49038: Doc bug - escaping
+    - d398d9c Fix dependency info
+
 1.08 -- Thu Feb 17 20:00:24 AST 2022
 
     [Significant Updates since 1.04]
