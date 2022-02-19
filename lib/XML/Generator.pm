@@ -295,7 +295,7 @@ characters escaped if this option is supplied.  If the value is 'always',
 then &, < and > (and " within attribute values) will be converted into
 the corresponding XML entity, although & will not be converted if it looks
 like it could be part of a valid entity (but see below).  If the value is
-'unescaped', then the escaping will be turned off character-by- character
+'unescaped', then the escaping will be turned off character-by-character
 if the character in question is preceded by a backslash, or for the
 entire string if it is supplied as a scalar reference.  So, for example,
 
@@ -303,7 +303,7 @@ entire string if it is supplied as a scalar reference.  So, for example,
 
 	one('<');      # <one>&lt;</one>
 	two('\&');     # <two>\&amp;</two>
-	three(\'>');   # <three>&gt;</three> (scalar refs always allowed)
+	three(\'<f>'); # <three><f></three> (scalar refs always allowed)
 	four('&lt;');  # <four>&lt;</four> (looks like an entity)
 	five('&#34;'); # <five>&#34;</five> (looks like an entity)
 
@@ -313,7 +313,7 @@ but
 
 	one('<');     # <one>&lt;</one>
 	two('\&');    # <two>&</two>
-	three(\'>');  # <three>></three> (aiee!)
+	three(\'<f>');# <three><f></three>  (scalar refs always allowed)
 	four('&lt;'); # <four>&amp;lt;</four> (no special case for entities)
 
 By default, high-bit data will be passed through unmodified, so that
