@@ -620,6 +620,10 @@ sub new {
     $options{'escape'} = 0;
   }
 
+  if ($options{'xml'} && ref $options{'xml'} ne 'HASH') {
+      Carp::croak("XML arguments must be a hash");
+  }
+
   if (ref $options{'namespace'} eq 'ARRAY') {
     if (@{ $options{'namespace'} } > 2 && (@{ $options{'namespace'} } % 2) != 0) {
       Carp::croak "odd number of arguments for namespace";
@@ -768,23 +772,38 @@ explicitly provide undef as the value.
 
 =cut
 
+sub _allow_xml_cmd {
+    my $this = shift;
+    return 1 if $this->{conformance} eq 'strict';
+    return 1 if defined $this->{xml};
+    return 0;
+}
+
+
 sub xmldecl {
-  my($this, @args) = @_;
+  my $this = shift;
 
-  return $this->XML::Generator::util::tag('xmldecl', @_)
-		unless $this->{conformance} eq 'strict';
+  return $this->XML::Generator::util::tag('xmldecl', @_) unless $this->{conformance} eq 'strict';
+  return $this->_xmldecl(@_);
+}
 
-  my $version  = $this->{'version'} || '1.0';
+sub _xmldecl {
+  my $this = shift;
+  my @args = @_;
+
+  return unless $this->_allow_xml_cmd;
+
+  my $version  = $this->{xml}{version} // $this->{'version'} || '1.0';
 
   # there's no explicit support for encodings yet, but at the
   # least we can know to put it in the declaration
-  my $encoding = $this->{'encoding'};
+  my $encoding = $this->{xml}{encoding} // $this->{'encoding'};
 
   # similarly, although we don't do anything with DTDs yet, we
   # recognize a 'dtd' => [ ... ] option to the constructor, and
   # use it to create a <!DOCTYPE ...> and to indicate that this
   # document can't stand alone.
-  my $doctype = $this->xmldtd($this->{dtd});
+  my $doctype = $this->xmldtd($this->{xml}{dtd} // $this->{dtd});
   my $standalone = $doctype ? "no" : "yes";
 
   for (my $i = 0; $i < $#args; $i += 2) {
@@ -807,12 +826,9 @@ sub xmldecl {
   $version    ||= '';
   $standalone ||= '';
 
-  my $xml = "<?xml$version$encoding$standalone?>";
-  $xml .= "\n$doctype" if $doctype;
-
-  $xml = "$xml\n";
-
-  return $xml;
+  my @xml = ("<?xml$version$encoding$standalone?>");
+  push(@xml, $doctype) if $doctype;
+  return join("\n", @xml, "");
 }
 
 =head2 xmldtd
@@ -883,7 +899,7 @@ sub xml {
   my $this = shift;
 
   return $this->XML::Generator::util::tag('xml', @_)
-		unless $this->{conformance} eq 'strict';
+        unless $this->_allow_xml_cmd;
 
   unless (@_) {
     Carp::croak "usage: object->xml( (COMMENT | PI)* XML (COMMENT | PI)* )";
@@ -903,7 +919,7 @@ sub xml {
     }
   }
 
-  return XML::Generator::final->new([$this->xmldecl(), @_]);
+  return XML::Generator::final->new([$this->_xmldecl(), @_]);
 }
 
 =head1 CREATING A SUBCLASS
