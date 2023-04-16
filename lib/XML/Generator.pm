@@ -803,8 +803,12 @@ sub _xmldecl {
   # recognize a 'dtd' => [ ... ] option to the constructor, and
   # use it to create a <!DOCTYPE ...> and to indicate that this
   # document can't stand alone.
-  my $doctype = $this->xmldtd($this->{xml}{dtd} // $this->{dtd});
-  my $standalone = $doctype ? "no" : "yes";
+  my $standalone;
+  my $doctype;
+  if ($this->{xml}{dtd} // $this->{dtd}) {
+      $doctype = $this->xmldtd($this->{xml}{dtd} // $this->{dtd});
+      $standalone = $doctype ? "no" : "yes";
+  }
 
   for (my $i = 0; $i < $#args; $i += 2) {
          if ($args[$i] eq 'version'   ) {
