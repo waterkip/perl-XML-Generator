@@ -15,9 +15,12 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "MIN_PERL_VERSION" => "5.010",
   "NAME" => "XML::Generator",
-  "PREREQ_PM" => {},
+  "PREREQ_PM" => {
+    "Carp" => 0
+  },
   "TEST_REQUIRES" => {
-    "Test" => 0
+    "Test" => 0,
+    "Test::More" => 0
   },
   "VERSION" => "1.12",
   "test" => {
@@ -27,7 +30,9 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Test" => 0
+  "Carp" => 0,
+  "Test" => 0,
+  "Test::More" => 0
 );
 
 
