@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use 5.008;
+use 5.010;
 
 use ExtUtils::MakeMaker;
 
@@ -13,13 +13,13 @@ my %WriteMakefileArgs = (
   },
   "DISTNAME" => "XML-Generator",
   "LICENSE" => "perl",
-  "MIN_PERL_VERSION" => "5.008",
+  "MIN_PERL_VERSION" => "5.010",
   "NAME" => "XML::Generator",
   "PREREQ_PM" => {},
   "TEST_REQUIRES" => {
     "Test" => 0
   },
-  "VERSION" => "1.11",
+  "VERSION" => "1.12",
   "test" => {
     "TESTS" => "t/*.t"
   }
