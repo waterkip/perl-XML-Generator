@@ -3,7 +3,7 @@
 use Test;
 use utf8;
 
-BEGIN { $| = 1; plan tests => 108; }
+BEGIN { $| = 1; plan tests => 109; }
 
 use XML::Generator ();
 ok(1);
