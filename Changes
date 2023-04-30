@@ -2,6 +2,23 @@ Revision history for Perl extension XML::Generator.
 
 {{$NEXT}}
 
+1.13 -- Sat Apr 29 21:45:32 ADT 2023
+
+    Production Release of 1.12 no changes.
+
+    [Significant Updates since 1.11]
+
+    Two fairly minor updates that should not impact anyone much.
+    Dropping support for 5.008 - if you really need it send a PR
+    to fix.  There has been a longstanding "bug" that inserted
+    standalone in the xml declaration whether it was needed or not.
+    This makes it optional if it is not required for
+    externally-defined DTD or directly specified.
+
+
+    - 1a4e7a0 Update version for Release 1.13
+    - abb366d v1.12
+
 1.12 -- Sat Apr 29 11:55:46 ADT 2023
 
     [Significant Updates since 1.11]
